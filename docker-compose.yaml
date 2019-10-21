@@ -16,13 +16,17 @@ services:
         depends_on:
             - postgres
         environment:
+            # User defined
+            - MAX_DOWNLOADS=10
+
+            # Backend
             - PROJECT_HOME=/app
             - LOAD_EX=n
             - EXECUTOR=Local
         volumes:
-            - ./airflow-logs:/usr/local/airflow/logs
+            - ./videos:/videos
             - ./dags:/usr/local/airflow/dags
-            - ./.credentials:/app/.credentials
+            - ./airflow-logs:/usr/local/airflow/logs
         ports:
             - "8080:8080"
         command: webserver
