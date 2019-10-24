@@ -11,7 +11,7 @@ services:
             - ./airflow-db/postgresql/data:/var/lib/postgresql/data
 
     webserver:
-        image: puckel/docker-airflow
+        build: .
         restart: always
         depends_on:
             - postgres
