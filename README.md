@@ -34,6 +34,8 @@ The service can be shut down with docker-compose:
 docker-compose -f docker-compose.yaml down
 ```
 
+As the jobs run, you should see files appear in the `videos` folder. These will be partitioned by playlist.
+
 
 ## Configuration
 
@@ -45,3 +47,13 @@ Some of these configuration options can be changed by edditing the DAG file `dag
 # Max number of videos downloaded per day per playlist
 MAX_DOWNLOADS=10
 ```
+
+## Tips
+
+### Re-setting the database
+
+We use a volume to persist the airflow database on the host. It can be reset by running `rm -r airflow-db/postgresql`
+
+Similarly, the log history can be removed by running `rm -r airflow-logs`
+
+
