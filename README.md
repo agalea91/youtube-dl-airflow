@@ -13,7 +13,7 @@ git clone https://github.com/agalea91/youtube-dl-airflow.git
 cd youtube-dl-airflow
 
 # Launch docker container
-docker-compose -f docker-compose.yaml up -d
+docker-compose -f docker-compose.yaml up -d --build
 
 # Check that your container is live
 docker container ls
