@@ -2,7 +2,7 @@
 
 Schedule and execute playlist downloads.
 
-*Warning: Youtube has started banning IP addresses from using youtube-dl for bulk downloading. Use cautiously. Note, however, this ban would not affect your ability to use youtube.com through your browser.*
+***Warning:** Youtube has started banning IP addresses from using youtube-dl for bulk downloading. Use cautiously. Note, however, this ban would not affect your ability to use youtube.com through your browser.*
 
 ## Installation
 
