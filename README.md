@@ -2,6 +2,8 @@
 
 Schedule and execute playlist downloads.
 
+*Warning: Youtube has started banning IP addresses from using youtube-dl for bulk downloading. Use cautiously. Note, however, this ban would not affect your ability to use youtube.com through your browser.*
+
 ## Installation
 
  - [Docker compose](https://docs.docker.com/compose/install/)
@@ -39,18 +41,45 @@ As the jobs run, you should see files appear in the `videos` folder. These will 
 
 ## Configuration
 
-By default, the airflow scheduler trigger the script to run daily. For each playlist included in `dags/youtube_playlists.json`, up to 10 of the most recetly added videos will be downloaded, ignoring anything downloaded already.
+By default, the airflow scheduler trigger the script to run daily.
 
-Some of these configuration options can be changed by edditing the DAG file `dags/download_youtube_playlists.py`, or by setting environment variables in `docker-compose.yaml`. In particular, you can change any of the following defaults:
+Define your playlists in `dags/youtube_playlists.json`. For example:
 
 ```
-# Max number of videos downloaded per day per playlist
-MAX_DOWNLOADS=10
+[
+    {
+        "name": "NutritionFacts.org",
+        "url": "https://www.youtube.com/playlist?list=PL5TLzNi5fYd8AjdKq-w8Te5gE_23NfUr_"
+    },
+    {
+        "name": "NHL Goals",
+        "url": "https://www.youtube.com/playlist?list=PLo12SYwt93SRpev0BAtupgW7HMKfYfkWH"
+    }
+]
 ```
+
+
+For each playlist included in `youtube_playlists.json`, the most recently added videos will be downloaded, ignoring anything downloaded already.
+
+Set configurations by changing `docker-compose.yaml`.
+
+ - Change environment variables, such as the number of max downloads per playlist:
+```
+environment:
+   # User defined
+   - MAX_DOWNLOADS=10
+```
+
+ - Change the mounted volumes, such as the place where videos are saved on your host machine:
+ ```
+volumes:
+   - /path/on/your/host:/videos
+ ```
+
 
 ## Tips
 
-### Re-setting the database
+### Resetting the database
 
 We use a volume to persist the airflow database on the host. It can be reset by running `rm -r airflow-db/postgresql`
 
